@@ -1,47 +1,44 @@
-
 import "./profile.css";
 import { Container } from "react-bootstrap";
 import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Image from "react-bootstrap/Image";
-import "bootstrap/dist/css/bootstrap.min.css";
-import Card from "react-bootstrap/Card";
 
+import "bootstrap/dist/css/bootstrap.min.css";
+
+import ProfileCard from "./components/ProfileCard";
+import { useEffect, useState } from "react";
+import Loading from "./components/Loading";
+import PostCard from "./components/PostCard";
 
 function Profile() {
-	const cards = [
-		{
-			id: 1,
-			name: "#1",
-			src: "https://media.geeksforgeeks.org/wp-content/uploads/20210425000233/test-300x297.png",
-		},
-		{
-			id: 2,
-			name: "#2",
-			src: "https://media.geeksforgeeks.org/wp-content/uploads/20210425000233/test-300x297.png",
-		},
-		{
-			id: 3,
-			name: "#3",
-			src: "https://media.geeksforgeeks.org/wp-content/uploads/20210425000233/test-300x297.png",
-		},
-	];
+	let [user, setUser] = useState();
+	let [posts, setPosts] = useState([]);
+
+	let [loading, setLoading] = useState(true);
+
+	useEffect(() => {
+		fetch("/user/api/get_logged_in_user")
+			.then((data) => data.json())
+			.then((data) => {
+				setUser(data.user);
+				setPosts(data.posts);
+				setLoading(false);
+			});
+	}, []);
+
+	if (loading) {
+		return <Loading />;
+	}
 
 	return (
 		<div>
 			<div id="gradient"></div>
-			<div id="card">
-				<div
-					style={{ display: "flex", justifyContent: "center", padding: "4px" }}
-				>
-					<h2>Name</h2>
-
-					<span class="left bottom">username: 731 366 ***</span>
-					<span class="right bottom">email: Czech Republic</span>
-					<br></br>
-					<img src="https://media.geeksforgeeks.org/wp-content/uploads/20210425000233/test-300x297.png" />
-				</div>
-			</div>
+			<ProfileCard
+				email={user.email}
+				first_name={user.first_name}
+				last_name={user.last_name}
+				username={user.username}
+				profile_photo={user.profile_photo}
+			/>
 
 			<br></br>
 			<br></br>
@@ -50,15 +47,15 @@ function Profile() {
 				<Container>
 					<br></br>
 					<Row md={3}>
-						{cards.map((card) => (
-							<Col key={card.id}>
-								<Card>
-									{card.name}
-									<Image src={card.src} thumbnail />
-								</Card>
-								<br></br>
-							</Col>
-						))}
+						{posts.map((post) => {
+							return (
+								<PostCard
+									description={post.description}
+									name={post.category.display_name}
+									url={post.image}
+								/>
+							);
+						})}
 					</Row>
 				</Container>
 			</div>

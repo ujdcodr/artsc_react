@@ -7,6 +7,7 @@ import Card from "react-bootstrap/Card";
 import { useEffect, useState } from "react";
 import Loading from "./components/Loading";
 import { useParams } from "react-router-dom";
+import PostCard from "./components/PostCard";
 
 //Images of a particular category
 
@@ -38,15 +39,7 @@ function Artwork() {
 				<br></br>
 				<Row md={3}>
 					{posts.map((post,idx) => (
-						<Col key={idx}>
-							<Card>
-								
-								{post.username}
-								<Image src={post.image} thumbnail />
-								{post.description}
-							</Card>
-							<br></br>
-						</Col>
+						<PostCard description={post.description} name={post.username} url={post.image}/>
 					))}
 				</Row>
 			</Container>
