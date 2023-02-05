@@ -7,6 +7,9 @@ import Image from 'react-bootstrap/Image';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Card from 'react-bootstrap/Card';
 import MainPage from './views/MainPage';
+import Navbar from './components/Navbar';
+import Profile from './Profile';
+import Artwork from './Artwork';
 
 import { BrowserRouter as Router,Routes, Route, Link, Navigate } from "react-router-dom";
 
@@ -22,14 +25,20 @@ function App() {
   "https://media.geeksforgeeks.org/wp-content/uploads/20210425000233/test-300x297.png"];
 
   const cards = [
-    { id: 1, name:"sketch",src: "https://media.geeksforgeeks.org/wp-content/uploads/20210425000233/test-300x297.png" },
-    { id: 2, name:"portrait",src: "https://media.geeksforgeeks.org/wp-content/uploads/20210425000233/test-300x297.png" },
-    { id: 3, name:"painting",src: "https://media.geeksforgeeks.org/wp-content/uploads/20210425000233/test-300x297.png" },
-    { id: 4, name:"graffiti",src: "https://media.geeksforgeeks.org/wp-content/uploads/20210425000233/test-300x297.png" },
-    { id: 5, name:"tatoo",src: "https://media.geeksforgeeks.org/wp-content/uploads/20210425000233/test-300x297.png" },
-    { id: 6, name:"abstract",src: "https://media.geeksforgeeks.org/wp-content/uploads/20210425000233/test-300x297.png" },
-    { id: 7, name:"crayon",src: "https://media.geeksforgeeks.org/wp-content/uploads/20210425000233/test-300x297.png" },
-    { id: 8, name:"sketch2",src: "https://media.geeksforgeeks.org/wp-content/uploads/20210425000233/test-300x297.png" },
+    { id: 1, name:"Portrait",src: "https://media.geeksforgeeks.org/wp-content/uploads/20210425000233/test-300x297.png" },
+    { id: 2, name:"Landscape",src: "https://media.geeksforgeeks.org/wp-content/uploads/20210425000233/test-300x297.png" },
+    { id: 3, name:"Genre Painting",src: "https://media.geeksforgeeks.org/wp-content/uploads/20210425000233/test-300x297.png" },
+    { id: 4, name:"Abstract",src: "https://media.geeksforgeeks.org/wp-content/uploads/20210425000233/test-300x297.png" },
+    { id: 5, name:"Religious Painting",src: "https://media.geeksforgeeks.org/wp-content/uploads/20210425000233/test-300x297.png" },
+    { id: 6, name:"City-scape",src: "https://media.geeksforgeeks.org/wp-content/uploads/20210425000233/test-300x297.png" },
+    { id: 7, name:"Sketch and Study",src: "https://media.geeksforgeeks.org/wp-content/uploads/20210425000233/test-300x297.png" },
+    { id: 8, name:"Illustration",src: "https://media.geeksforgeeks.org/wp-content/uploads/20210425000233/test-300x297.png" },
+    { id: 9, name:"Still Life",src: "https://media.geeksforgeeks.org/wp-content/uploads/20210425000233/test-300x297.png" },
+    { id: 10, name:"Symbolic Painting",src: "https://media.geeksforgeeks.org/wp-content/uploads/20210425000233/test-300x297.png" },
+    { id: 11, name:"Figurative",src: "https://media.geeksforgeeks.org/wp-content/uploads/20210425000233/test-300x297.png" },
+    { id: 12, name:"Design",src: "https://media.geeksforgeeks.org/wp-content/uploads/20210425000233/test-300x297.png" },
+    { id: 13, name:"Mythological Painting",src: "https://media.geeksforgeeks.org/wp-content/uploads/20210425000233/test-300x297.png" },
+    { id: 14, name:"Marina",src: "https://media.geeksforgeeks.org/wp-content/uploads/20210425000233/test-300x297.png" }
   ];
 
   const [showMainPage, setShowMainPage] = useState(false);
@@ -39,94 +48,21 @@ function App() {
   };
 
   return (
-    /*
-    <div className="App">
-      
-       <Container>
-      <Row className='mt-5' md={3}>
-        <Card onClick={onclick}>
-          Sketch
-        <Col><Image
-        src=
-"https://media.geeksforgeeks.org/wp-content/uploads/20210425000233/test-300x297.png"
-        rounded
-      /></Col>
-      
-      </Card>
-      <Card>
-        Portrait
-        <Col><Image
-        src=
-"https://media.geeksforgeeks.org/wp-content/uploads/20210425000233/test-300x297.png"
-        rounded
-      /></Col></Card>
-       <Card>
-        Anime
-        <Col><Image
-        src=
-"https://media.geeksforgeeks.org/wp-content/uploads/20210425000233/test-300x297.png"
-        rounded
-      /></Col></Card>
-      </Row>
-      <Row className='mt-5' md={3}>
-        <Card>
-          Painting
-        <Col><Image
-        src=
-"https://media.geeksforgeeks.org/wp-content/uploads/20210425000233/test-300x297.png"
-        rounded
-      /></Col></Card>
-      <Card>
-        <Col><Image
-        src=
-"https://media.geeksforgeeks.org/wp-content/uploads/20210425000233/test-300x297.png"
-        rounded
-      /></Col></Card>
-      <Card>
-        <Col><Image
-        src=
-"https://media.geeksforgeeks.org/wp-content/uploads/20210425000233/test-300x297.png"
-        rounded
-      /></Col></Card>
-
-      </Row>
-      <Row className='mt-5' md={3}>
-        <Card>
-        <Col><Image
-        src=
-"https://media.geeksforgeeks.org/wp-content/uploads/20210425000233/test-300x297.png"
-        rounded
-      /></Col></Card>
-      <Card>
-        <Col><Image
-        src=
-"https://media.geeksforgeeks.org/wp-content/uploads/20210425000233/test-300x297.png"
-        rounded
-      /></Col></Card>
-      <Card>
-        <Col><Image
-        src=
-"https://media.geeksforgeeks.org/wp-content/uploads/20210425000233/test-300x297.png"
-        rounded
-      /></Col></Card>
-      </Row>
-
-    </Container>
-    
-    </div>
-    */
+<>
+<Navbar />
+<Profile />
+<Artwork />
     <div className="App">
         <Container>
+        <br></br>
       <Row md={3}> 
         {cards.map((card) => (
           <Col key={card.id}  >
-            <Link to="/MainPage">
               <Card>
                 {card.name}
                 <Image src={card.src} thumbnail />
               </Card>
-              </Link>
-            
+            <br></br>
           </Col>
         ))}
       </Row>
@@ -134,7 +70,7 @@ function App() {
     </Container>
 
       </div>
-
+</>
   );
 }
 
