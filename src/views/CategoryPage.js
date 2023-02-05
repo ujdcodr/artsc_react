@@ -119,7 +119,7 @@ const CategoryPage = () => {
 						<Col key={category.id}>
 							<Card style={{cursor:"pointer"}} onClick={()=>navigate(`/social/category/${category.id}`)}>
 								{category.display_name}
-								<Image src={"https://media.geeksforgeeks.org/wp-content/uploads/20210425000233/test-300x297.png"} thumbnail />
+								<Image src={category.default_pic} thumbnail />
 							</Card>
 							<br></br>
 						</Col>

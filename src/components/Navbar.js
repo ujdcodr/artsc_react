@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 function Navbar() {
 	return (
 		<nav class="navbar navbar-dark bg-dark navbar-expand-lg navbar-light bg-light">
-			<a class="navbar-brand" href="#">
+			<a class="navbar-brand" href="/" onClick={(event)=>event.preventDefault()}>
 				&nbsp; &nbsp; &nbsp; artSC
 			</a>
 			<button
@@ -24,13 +24,16 @@ function Navbar() {
 					</NavLink>
 
 					<NavLink to={"/social/profile"} className="nav-link">
-            Profile <span class="sr-only"></span>
+						Profile <span class="sr-only"></span>
 					</NavLink>
-					
+
+					<NavLink to={"/social/new_post"} className="nav-link">
+						New Post <span class="sr-only"></span>
+					</NavLink>
+
 					<a class="nav-item nav-link" href="/logout">
 						Log Out
 					</a>
-	
 				</div>
 			</div>
 		</nav>
