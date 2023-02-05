@@ -103,9 +103,9 @@ const CategoryPage = () => {
 		return (
 			<Container>
 				<br></br>
-				<Row md={3}>
+				{/* <Row md={3}> */}
 					<Loading />
-				</Row>
+				{/* </Row> */}
 			</Container>
 		);
 	}
