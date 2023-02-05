@@ -14,8 +14,6 @@ function App() {
 	return (
 		<>
 			<Navbar />
-			{/* <Profile />
-<Artwork /> */}
 			<Routes>
 				<Route path="/social" element={<CategoryPage />} />
 				<Route path="/social/profile" element={<Profile />} />

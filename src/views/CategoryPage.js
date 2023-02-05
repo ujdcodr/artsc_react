@@ -4,8 +4,28 @@ import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
 import { Container } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
+import { useEffect, useState } from "react";
+import Loading from "../components/Loading";
+import { useNavigate } from "react-router-dom";
 
 const CategoryPage = () => {
+	let [categories, setCategories] = useState([]);
+	let [loading, setLoading] = useState(true);
+
+	let navigate = useNavigate();
+
+	
+
+	useEffect(() => {
+		fetch("/social/api/get_categories/")
+			.then((data) => data.json())
+			.then((data) => {
+				setCategories(data.categories);
+				setLoading(false);
+			})
+			.catch((err) => console.log(err));
+	}, []);
+
 	const cards = [
 		{
 			id: 1,
@@ -79,22 +99,32 @@ const CategoryPage = () => {
 		},
 	];
 
+	if (loading) {
+		return (
+			<Container>
+				<br></br>
+				<Row md={3}>
+					<Loading />
+				</Row>
+			</Container>
+		);
+	}
+
 	return (
 		<div className="App">
 			<Container>
 				<br></br>
 				<Row md={3}>
-					{cards.map((card) => (
-						<Col key={card.id}>
-							<Card>
-								{card.name}
-								<Image src={card.src} thumbnail />
+					{categories.map((category) => (
+						<Col key={category.id}>
+							<Card style={{cursor:"pointer"}} onClick={()=>navigate(`/social/category/${category.id}`)}>
+								{category.display_name}
+								<Image src={"https://media.geeksforgeeks.org/wp-content/uploads/20210425000233/test-300x297.png"} thumbnail />
 							</Card>
 							<br></br>
 						</Col>
 					))}
 				</Row>
-				<MainPage />
 			</Container>
 		</div>
 	);
