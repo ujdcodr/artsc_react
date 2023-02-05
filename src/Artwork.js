@@ -1,14 +1,16 @@
-import  { useState } from 'react'
+
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import {Container} from 'react-bootstrap';
 import Image from 'react-bootstrap/Image';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Card from 'react-bootstrap/Card';
-import MainPage from './views/MainPage';
-import Navbar from './components/Navbar';
-import Profile from './Profile';
 
+
+
+
+
+//Images of a particular category
 
 function Artwork(){
     const cards = [
@@ -28,11 +30,7 @@ function Artwork(){
         { id: 14, name:"Marina",src: "https://media.geeksforgeeks.org/wp-content/uploads/20210425000233/test-300x297.png" }
       ];
     
-      const [showMainPage, setShowMainPage] = useState(false);
-    
-      const handleClick = () => {
-        setShowMainPage(true);
-      };
+     
       
     return (
         <div className="App">
@@ -49,7 +47,7 @@ function Artwork(){
           </Col>
         ))}
       </Row>
-      {showMainPage && <MainPage />}
+     
     </Container>
 
       </div>
