@@ -9,6 +9,7 @@ import Artwork from "./Artwork";
 import { Routes, Route } from "react-router-dom";
 import CategoryPage from "./views/CategoryPage";
 import NewPost from "./views/NewPost";
+import User from "./views/User";
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
 				<Route path="/social/profile" element={<Profile />} />
 				<Route path="/social/category/:id" element={<Artwork />} />
 				<Route path="/social/new_post/" element={<NewPost/>}/>
+				<Route path="/social/user/:username" element={<User/>}/>
 			</Routes>
 		</>
 	);
