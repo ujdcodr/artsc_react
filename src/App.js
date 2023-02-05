@@ -8,7 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Card from 'react-bootstrap/Card';
 import MainPage from './views/MainPage';
 
-import { Link } from "react-router-dom";
+import { BrowserRouter as Router,Routes, Route, Link, Navigate } from "react-router-dom";
 
 
 function App() {
@@ -120,16 +120,19 @@ function App() {
       <Row md={3}> 
         {cards.map((card) => (
           <Col key={card.id}  >
-              <Card onClick={handleClick}>
+            <Link to="/MainPage">
+              <Card>
                 {card.name}
                 <Image src={card.src} thumbnail />
               </Card>
+              </Link>
             
           </Col>
         ))}
       </Row>
       {showMainPage && <MainPage />}
     </Container>
+
       </div>
 
   );
