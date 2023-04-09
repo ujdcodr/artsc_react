@@ -50,6 +50,7 @@ function Profile() {
 						{posts.map((post) => {
 							return (
 								<PostCard
+									key={post.id}
 									description={post.description}
 									name={post.category.display_name}
 									url={post.image}

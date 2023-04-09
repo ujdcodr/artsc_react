@@ -6,9 +6,9 @@ const ProfileCard = ({username,email,first_name,last_name,profile_photo})=>{
 				>
 					<h2>Name: {first_name} {last_name}</h2>
 
-					<span class="left bottom">{username}</span>
+					<span className="left bottom">{username}</span>
                    
-					<span class="right bottom">email: {email}</span>
+					<span className="right bottom">email: {email}</span>
 					<br></br>
 					<img src={profile_photo} />
 				</div>

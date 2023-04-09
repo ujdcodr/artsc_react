@@ -96,12 +96,12 @@ const NewPost = () => {
 						disabled={loading}
 						onClick={() => get_category()}
 						type="button"
-						class="btn mt-3 btn-secondary btn-lg"
+						className="btn mt-3 btn-secondary btn-lg"
 					>
 						{loading ? (
 							<div>
-								<div class="spinner-border text-light" role="status">
-									<span class="sr-only"></span>
+								<div className="spinner-border text-light" role="status">
+									<span className="sr-only"></span>
 								</div>
 							</div>
 						) : (
@@ -117,12 +117,12 @@ const NewPost = () => {
 						onClick={() => submit()}
 						disabled={loading}
 						type="button"
-						class="btn mt-3 btn-secondary btn-lg"
+						className="btn mt-3 btn-secondary btn-lg"
 					>
 						{loading ? (
 							<div>
-								<div class="spinner-border text-light" role="status">
-									<span class="sr-only"></span>
+								<div className="spinner-border text-light" role="status">
+									<span className="sr-only"></span>
 								</div>
 							</div>
 						) : (
@@ -138,53 +138,53 @@ const NewPost = () => {
 
 	return (
 		<>
-			<div class="container py-5">
-				<header class="text-white text-center">
-					<h1 class="display-4">Upload your artwork.</h1>
-					<p class="lead mb-0">Please select a file from your local device..</p>
+			<div className="container py-5">
+				<header className="text-white text-center">
+					<h1 className="display-4">Upload your artwork.</h1>
+					<p className="lead mb-0">Please select a file from your local device..</p>
 					<img
 						src="https://bootstrapious.com/i/snippets/sn-img-upload/image.svg"
 						alt=""
 						width="150"
-						class="mb-4"
+						className="mb-4"
 					/>
 				</header>
 
-				<div class="row py-4">
-					<div class="col-lg-6 mx-auto">
-						<div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
+				<div className="row py-4">
+					<div className="col-lg-6 mx-auto">
+						<div className="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
 							<input
 								id="upload"
 								onChange={onImageChange}
 								type="file"
-								class="form-control border-0"
+								className="form-control border-0"
 							/>
-							{/* <label id="upload-label" for="upload" class="font-weight-light text-muted">Choose file</label> */}
-							<div class="input-group-append">
-								<label for="upload" class="btn btn-light m-0 rounded-pill px-4">
+							{/* <label id="upload-label" for="upload" className="font-weight-light text-muted">Choose file</label> */}
+							<div className="input-group-append">
+								<label for="upload" className="btn btn-light m-0 rounded-pill px-4">
 									{" "}
-									<i class="fa fa-cloud-upload mr-2 text-muted"></i>
-									<small class="text-uppercase font-weight-bold text-muted">
+									<i className="fa fa-cloud-upload mr-2 text-muted"></i>
+									<small className="text-uppercase font-weight-bold text-muted">
 										Choose file
 									</small>
 								</label>
 							</div>
 						</div>
 
-						<p class="font-italic text-white text-center">
+						<p className="font-italic text-white text-center">
 							The image uploaded will be rendered inside the box below.
 						</p>
-						<div class="image-area mt-4">
+						<div className="image-area mt-4">
 							<img
 								id="imageResult"
 								alt="Hello"
 								src={file ? file : "#"}
-								class="img-fluid rounded shadow-sm mx-auto d-block"
+								className="img-fluid rounded shadow-sm mx-auto d-block"
 							/>
 						</div>
 						{category ? (
 							<>
-								<p class="font-italic text-white text-center">
+								<p className="font-italic text-white text-center">
 									{category.display_name}
 								</p>
 								<div style={{ textAlign: "center", justifyContent: "center" }}>

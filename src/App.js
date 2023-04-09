@@ -10,6 +10,8 @@ import { Routes, Route } from "react-router-dom";
 import CategoryPage from "./views/CategoryPage";
 import NewPost from "./views/NewPost";
 import User from "./views/User";
+import { useEffect, useState } from "react";
+import FriendRequests from "./views/FriendRequests";
 
 function App() {
 
@@ -22,6 +24,7 @@ function App() {
 				<Route path="/social/category/:id" element={<Artwork />} />
 				<Route path="/social/new_post/" element={<NewPost/>}/>
 				<Route path="/social/user/:username" element={<User/>}/>
+				<Route path="/social/network" element={<FriendRequests/>}/>
 			</Routes>
 		</>
 	);

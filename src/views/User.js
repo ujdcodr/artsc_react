@@ -1,47 +1,109 @@
-import { useState } from "react"
+import { useState, useEffect } from "react";
 import { Col, Container } from "react-bootstrap";
 import Row from "react-bootstrap/Row";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import ProfileCard from "../components/ProfileCard";
-import { useEffect } from "react";
 import Loading from "../components/Loading";
 
 import { useParams } from "react-router-dom";
 
-const User = () =>{
+const User = () => {
+	const FRIEND_STATS = {
+		SENT: "SENT",
+		FRIEND: "FRIEND",
+		NOT_A_FRIEND: "NOT A FRIEND",
+	};
 
-    let [user,setUser] = useState();
+	let [user, setUser] = useState();
+	let [friendStatus, setFriendStatus] = useState(" ");
+	let [loading, setLoading] = useState(true);
+	let [sentFriendRequest, setFriendRequest] = useState(false);
 
-    let {username} = useParams();
+	let { username } = useParams();
 
-    useEffect(()=>{
-        fetch(`/user/api/get_user_data/?username=${username}`)
+	useEffect(() => {
+		fetch(`/user/api/get_user_data/?username=${username}`)
 			.then((data) => data.json())
 			.then((data) => {
 				setUser(data.user);
+				setFriendStatus(data.friend);
 				setLoading(false);
 			});
-    },[])
+	}, []);
 
-    let [loading,setLoading] = useState(true);
+	if (loading) {
+		return <Loading />;
+	}
 
-    if(loading) {
-        return (
-            <Loading/>
-        );
-    }
+	const getCookie = (name) => {
+		let cookieValue = null;
+		if (document.cookie && document.cookie !== "") {
+			const cookies = document.cookie.split(";");
+			for (let i = 0; i < cookies.length; i++) {
+				const cookie = cookies[i].trim();
+				// Does this cookie string begin with the name we want?
+				if (cookie.substring(0, name.length + 1) === name + "=") {
+					cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+					break;
+				}
+			}
+		}
+		return cookieValue;
+	};
 
-    return(
-        <div>
+	const send_friend_request = () => {
+		setFriendRequest(true);
+		let formData = new FormData();
+		formData.append("username", username);
+
+		fetch("/social/api/send_friend_request/", {
+			method: "POST",
+			body: formData,
+			headers: {
+				"X-CSRFToken": getCookie("csrftoken"),
+			},
+		})
+			.then((data) => data.json())
+			.then((data) => {
+				if (data.status === "successful") {
+					setFriendStatus(FRIEND_STATS.SENT);
+				} else {
+					alert(data.error);
+				}
+			});
+	};
+
+	const render_friend_button = () => {
+		if (friendStatus === FRIEND_STATS.FRIEND) {
+			return <></>;
+		} else if (friendStatus === FRIEND_STATS.NOT_A_FRIEND) {
+			return (
+				<button onClick={()=>send_friend_request()} type="button" className="btn btn-secondary">
+					Send Frind Request
+				</button>
+			);
+		} else if (friendStatus === FRIEND_STATS.SENT) {
+			return (
+				<button disabled type="button" className="btn btn-secondary">
+					Friend Request Sent
+				</button>
+			);
+		} else {
+			return <></>;
+		}
+	};
+
+	return (
+		<div>
 			<div id="gradient"></div>
 			<ProfileCard
 				email={user.email}
 				first_name={user.first_name}
 				last_name={user.last_name}
 				username={user.username}
-				profile_photo={'/media/default.jpeg'}
+				profile_photo={"/media/default.jpeg"}
 			/>
 
 			<br></br>
@@ -50,23 +112,18 @@ const User = () =>{
 			<div className="App">
 				<Container>
 					<br></br>
-					<Row >
+					<Row>
 						<Col>
-                        <div style={{justifyContent: "center", textAlign: "center"}}>
-                            <button type="button" class="btn btn-secondary">
-                                
-                                Send Frind Request
-                            
-                            </button>
-                        </div>
-                        
-                        </Col>
+							<div style={{ justifyContent: "center", textAlign: "center" }}>
+								{render_friend_button()}
+								
+							</div>
+						</Col>
 					</Row>
 				</Container>
 			</div>
 		</div>
-    );
-
-}
+	);
+};
 
 export default User;
