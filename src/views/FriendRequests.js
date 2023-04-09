@@ -52,7 +52,14 @@ const FriendRequests = () => {
 			.then((data) => {
                 console.log(data);
                 if(data.status === "successful") {
-                    setFriendRequests(friend_requests.filter((friend_request)=>friend_request.id!=id));
+					let friend_request_selected = null;
+					for(const element of friend_requests) {
+						if(element.id === id) {
+							friend_request_selected = element;
+						}
+					}
+                    setFriendRequests(friend_requests.filter((friend_request)=>friend_request.id!==id));
+					setFriends([...friends,friend_request_selected]);
                 }
             });
 	};

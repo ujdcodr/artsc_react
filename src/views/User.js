@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
-import { Col, Container } from "react-bootstrap";
+import { Col, Container, Card, Image } from "react-bootstrap";
 import Row from "react-bootstrap/Row";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import ProfileCard from "../components/ProfileCard";
 import Loading from "../components/Loading";
+import PostCard from "../components/PostCard";
 
 import { useParams } from "react-router-dom";
 
@@ -17,6 +18,7 @@ const User = () => {
 	};
 
 	let [user, setUser] = useState();
+	let [posts, setPosts] = useState([]);
 	let [friendStatus, setFriendStatus] = useState(" ");
 	let [loading, setLoading] = useState(true);
 	let [sentFriendRequest, setFriendRequest] = useState(false);
@@ -28,6 +30,7 @@ const User = () => {
 			.then((data) => data.json())
 			.then((data) => {
 				setUser(data.user);
+				setPosts(data.posts);
 				setFriendStatus(data.friend);
 				setLoading(false);
 			});
@@ -80,7 +83,11 @@ const User = () => {
 			return <></>;
 		} else if (friendStatus === FRIEND_STATS.NOT_A_FRIEND) {
 			return (
-				<button onClick={()=>send_friend_request()} type="button" className="btn btn-secondary">
+				<button
+					onClick={() => send_friend_request()}
+					type="button"
+					className="btn btn-secondary"
+				>
 					Send Frind Request
 				</button>
 			);
@@ -116,9 +123,19 @@ const User = () => {
 						<Col>
 							<div style={{ justifyContent: "center", textAlign: "center" }}>
 								{render_friend_button()}
-								
 							</div>
 						</Col>
+					</Row>
+					<Row md={3}>
+						{posts.map((post, idx) => (
+							<div style={{ cursor: "pointer" }}>
+								<PostCard
+									description={post.description}
+									name={post.username}
+									url={post.image}
+								/>
+							</div>
+						))}
 					</Row>
 				</Container>
 			</div>
